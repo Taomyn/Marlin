@@ -16,29 +16,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
-/**
- * CREALITY v4.2.7 (STM32F103) board pin assignments
- */
+#pragma once
 
-#define BOARD_INFO_NAME      "Creality v4.2.7"
-#define DEFAULT_MACHINE_NAME "Creality3D"
+#define BOARD_INFO_NAME "Anet ET4P 1.x"
 
 //
-// Steppers
+// TMC2208 Configuration_adv defaults for Anet ET4P-MB_V1.x
 //
-#define X_STEP_PIN                          PB9
-#define X_DIR_PIN                           PC2
-#define Y_STEP_PIN                          PB7
+#if !AXIS_DRIVER_TYPE_X(TMC2208_STANDALONE) || !AXIS_DRIVER_TYPE_Y(TMC2208_STANDALONE) || !AXIS_DRIVER_TYPE_Z(TMC2208_STANDALONE) || !AXIS_DRIVER_TYPE_E0(TMC2208_STANDALONE)
+  #error "ANET_ET4P requires ([XYZ]|E0)_DRIVER_TYPE set to TMC2208_STANDALONE."
+#endif
 
-#define Y_DIR_PIN                           PB8
-#define Z_STEP_PIN                          PB5
-#define Z_DIR_PIN                           PB6
-
-#define E0_STEP_PIN                         PB3
-#define E0_DIR_PIN                          PB4
-
-#include "pins_CREALITY_V4.h"
+#include "pins_ANET_ET4.h"
