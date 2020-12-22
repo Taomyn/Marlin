@@ -1175,9 +1175,9 @@
 
 // The size of the print bed
 //@Malic
-#define X_BED_SIZE 410
+#define X_BED_SIZE 400
 //@Malic
-#define Y_BED_SIZE 410
+#define Y_BED_SIZE 400
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
