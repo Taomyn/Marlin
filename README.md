@@ -137,7 +137,7 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Enable `BEEP_ON_FEEDRATE_CHANGE`
    - Enable `PROBE_OFFSET_WIZARD`
    - Enable `PROBE_OFFSET_WIZARD_START_Z`
-   - Enable `PROBE_OFFSET_WIZARD_XY_POS`
+   - Set `PROBE_OFFSET_WIZARD_XY_POS { X_CENTER + 40, Y_CENTER }` - pushes probe back to centre of bed
    - Enable `LCD_INFO_MENU`
    - Enable `TURBO_BACK_MENU_ITEM`
    - Enable `LED_CONTROL_MENU`
