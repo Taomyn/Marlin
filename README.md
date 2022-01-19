@@ -165,7 +165,7 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Set `SDSORT_CACHE_NAMES true`
    - Enable `UTF_FILENAME_SUPPORT`
    - Enable `LONG_FILENAME_HOST_SUPPORT`
-   - Enable `LONG_FILENAME_WRITE_SUPPORT`
+   - Enable `LONG_FILENAME_WRITE_SUPPORT` - currently disabled as it fails to compile
    - Enable `SCROLL_LONG_FILENAMES`
    - Enable `SD_ABORT_ON_ENDSTOP_HIT`
    - Enable `AUTO_REPORT_SD_STATUS`
