@@ -237,7 +237,7 @@
   #define LCD_HEIGHT                  10    // Character lines
   #define LCD_CONTRAST_MIN            127
   #define LCD_CONTRAST_MAX            255
-  #define DEFAULT_LCD_CONTRAST        250
+  #define LCD_CONTRAST_DEFAULT        250
   #define CONVERT_TO_EXT_ASCII        // Use extended 128-255 symbols from ASCII table.
                                       // At this time present conversion only for cyrillic - bg, ru and uk languages.
                                       // First 7 ASCII symbols in panel font must be replaced with Marlin's special symbols.
@@ -509,7 +509,7 @@
 #if HAS_DWIN_E3V2 || IS_DWIN_MARLINUI
   #define SERIAL_CATCHALL 0
   #ifndef LCD_SERIAL_PORT
-    #if MB(BTT_SKR_MINI_E3_V1_0, BTT_SKR_MINI_E3_V1_2, BTT_SKR_MINI_E3_V2_0, BTT_SKR_E3_TURBO)
+    #if MB(BTT_SKR_MINI_E3_V1_0, BTT_SKR_MINI_E3_V1_2, BTT_SKR_MINI_E3_V2_0, BTT_SKR_MINI_E3_V3_0, BTT_SKR_E3_TURBO)
       #define LCD_SERIAL_PORT 1
     #else
       #define LCD_SERIAL_PORT 3 // Creality 4.x board
