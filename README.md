@@ -220,6 +220,7 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Enable `HOST_ACTION_COMMANDS`
    - Enable `HOST_PAUSE_M76`
    - Enable `HOST_PROMPT_SUPPORT`
+   - Enable `HOST_STATUS_NOTIFICATIONS`
    - Enable `CANCEL_OBJECTS`
 
 # Marlin 3D Printer Firmware
