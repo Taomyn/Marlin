@@ -147,7 +147,7 @@ constexpr inline int strncmp_constexpr(const char* lhs, const char* rhs, std::si
     return rhs != nullptr ? -1 : 1;
 
   for (std::size_t i = 0; i < count; ++i)
-    if (lhs[i] != rhs[i]) {
+    if (lhs[i] != rhs[i])
       return lhs[i] < rhs[i] ? -1 : 1;
     else if (lhs[i] == '\0')
       return 0;
