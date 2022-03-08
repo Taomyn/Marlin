@@ -222,6 +222,7 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Enable `HOST_PROMPT_SUPPORT`
    - Enable `HOST_STATUS_NOTIFICATIONS`
    - Enable `CANCEL_OBJECTS`
+   - Enable `FWRETRACT`
 
 # Marlin 3D Printer Firmware
 
