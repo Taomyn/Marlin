@@ -74,7 +74,7 @@
 
 #if ENABLED(EXTENSIBLE_UI)
   #include "../lcd/extui/ui_api.h"
-#elif ENABLED(DWIN_CREALITY_LCD_ENHANCED)
+#elif ENABLED(DWIN_LCD_PROUI)
   #include "../lcd/e3v2/proui/dwin.h"
 #elif ENABLED(DWIN_CREALITY_LCD_JYERSUI)
   #include "../lcd/e3v2/jyersui/dwin.h"
@@ -487,7 +487,7 @@ typedef struct SettingsDataStruct {
   //
   // Ender-3 V2 DWIN
   //
-  #if ENABLED(DWIN_CREALITY_LCD_ENHANCED)
+  #if ENABLED(DWIN_LCD_PROUI)
     uint8_t dwin_data[eeprom_data_size];
   #elif ENABLED(DWIN_CREALITY_LCD_JYERSUI)
     uint8_t dwin_settings[CrealityDWIN.eeprom_data_size];
@@ -1465,18 +1465,20 @@ void MarlinSettings::postprocess() {
     //
     // Creality DWIN User Data
     //
-    #if ENABLED(DWIN_CREALITY_LCD_ENHANCED)
+    #if ENABLED(DWIN_LCD_PROUI)
     {
+      _FIELD_TEST(dwin_data);
       char dwin_data[eeprom_data_size] = { 0 };
       DWIN_StoreSettings(dwin_data);
-      _FIELD_TEST(dwin_data);
       EEPROM_WRITE(dwin_data);
     }
-    #elif ENABLED(DWIN_CREALITY_LCD_JYERSUI)
+    #endif
+
+    #if ENABLED(DWIN_CREALITY_LCD_JYERSUI)
     {
+      _FIELD_TEST(dwin_settings);
       char dwin_settings[CrealityDWIN.eeprom_data_size] = { 0 };
       CrealityDWIN.Save_Settings(dwin_settings);
-      _FIELD_TEST(dwin_settings);
       EEPROM_WRITE(dwin_settings);
     }
     #endif
@@ -1610,7 +1612,7 @@ void MarlinSettings::postprocess() {
         stored_ver[1] = '\0';
       }
       DEBUG_ECHO_MSG("EEPROM version mismatch (EEPROM=", stored_ver, " Marlin=" EEPROM_VERSION ")");
-      TERN_(DWIN_CREALITY_LCD_ENHANCED, LCD_MESSAGE(MSG_ERR_EEPROM_VERSION));
+      TERN_(DWIN_LCD_PROUI, LCD_MESSAGE(MSG_ERR_EEPROM_VERSION));
       TERN_(HOST_PROMPT_SUPPORT, hostui.notify(GET_TEXT_F(MSG_ERR_EEPROM_VERSION)));
 
       IF_DISABLED(EEPROM_AUTO_INIT, ui.eeprom_alert_version());
@@ -2408,7 +2410,7 @@ void MarlinSettings::postprocess() {
       //
       // Creality DWIN User Data
       //
-      #if ENABLED(DWIN_CREALITY_LCD_ENHANCED)
+      #if ENABLED(DWIN_LCD_PROUI)
       {
         const char dwin_data[eeprom_data_size] = { 0 };
         _FIELD_TEST(dwin_data);
@@ -2512,7 +2514,7 @@ void MarlinSettings::postprocess() {
       else if (working_crc != stored_crc) {
         eeprom_error = true;
         DEBUG_ERROR_MSG("EEPROM CRC mismatch - (stored) ", stored_crc, " != ", working_crc, " (calculated)!");
-        TERN_(DWIN_CREALITY_LCD_ENHANCED, LCD_MESSAGE(MSG_ERR_EEPROM_CRC));
+        TERN_(DWIN_LCD_PROUI, LCD_MESSAGE(MSG_ERR_EEPROM_CRC));
         TERN_(HOST_EEPROM_CHITCHAT, hostui.notify(GET_TEXT_F(MSG_ERR_EEPROM_CRC)));
         IF_DISABLED(EEPROM_AUTO_INIT, ui.eeprom_alert_crc());
       }
@@ -2830,7 +2832,7 @@ void MarlinSettings::reset() {
     #endif
   #endif
 
-  TERN_(DWIN_CREALITY_LCD_ENHANCED, DWIN_SetDataDefaults());
+  TERN_(DWIN_LCD_PROUI, DWIN_SetDataDefaults());
   TERN_(DWIN_CREALITY_LCD_JYERSUI, CrealityDWIN.Reset_Settings());
 
   //
@@ -3203,9 +3205,11 @@ void MarlinSettings::reset() {
 
   postprocess();
 
-  FSTR_P const hdsl = F("Hardcoded Default Settings Loaded");
-  TERN_(HOST_EEPROM_CHITCHAT, hostui.notify(hdsl));
-  DEBUG_ECHO_START(); DEBUG_ECHOLNF(hdsl);
+  #if EITHER(EEPROM_CHITCHAT, DEBUG_LEVELING_FEATURE)
+    FSTR_P const hdsl = F("Hardcoded Default Settings Loaded");
+    TERN_(HOST_EEPROM_CHITCHAT, hostui.notify(hdsl));
+    DEBUG_ECHO_START(); DEBUG_ECHOLNF(hdsl);
+  #endif
 
   TERN_(EXTENSIBLE_UI, ExtUI::onFactoryReset());
 }
