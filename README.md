@@ -205,6 +205,7 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Set `CHOPPER_TIMING CHOPPER_DEFAULT_24V`- correct for Ender 3 Pro with 24v PSU
    - Enable `MONITOR_DRIVER_STATUS`
    - Set `Z_HYBRID_THRESHOLD 20`
+   - Added `DIAG_JUMPERS_REMOVED` - Motherboard DIAG jumpers must be removed when SENSORLESS_HOMING is disabled. Define DIAG_JUMPERS_REMOVED to suppress this warning.
    - Set `X_STALL_SENSITIVITY 72`
    - Set `Y_STALL_SENSITIVITY 70`
    - Set `Z_STALL_SENSITIVITY 10`
