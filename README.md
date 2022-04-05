@@ -47,11 +47,11 @@ This then worked for me and I then tried the same with my custom firmware and it
    - Set `CUSTOM_MACHINE_NAME "Ender-3 Pro"`
    - Set `TEMP_SENSOR_BED 1`
    - Set `HEATER_0_MAXTEMP 315` to allow for some PETG filaments
-   - Enable `PID_EDIT_MENU`
-   - Enable `PID_AUTOTUNE_MENU`
    - Set `DEFAULT_Kp`, `DEFAULT_Ki` and `DEFAULT_Kd` to recent PID tune values to save repeating when flashed
    - Enable `PIDTEMPBED`
    - Set `DEFAULT_bedKp`, `DEFAULT_bedKi` and `DEFAULT_bedKd` to recent PID bed tune values to save repeating when flashed
+   - Enable `PID_EDIT_MENU`
+   - Enable `PID_AUTOTUNE_MENU`
    - Set `EXTRUDE_MINTEMP` to '180' as 170 seems too low
    - Set `EXTRUDE_MAXLENGTH` to '600'
    - Disable `USE_ZMIN_PLUG` as using BL-Touch and Z endstop not fitted
