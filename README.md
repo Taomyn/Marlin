@@ -21,7 +21,7 @@ This then worked for me and I then tried the same with my custom firmware and it
  - `platformio.ini`
    - default environment: `STM32G0B1RE_btt`
  - `Marlin/Version.h`
-   - Get rid of "bugfix" from build version: `"v2.0.x"`
+   - Get rid of "bugfix" from build version: `"v2.1.x"`
    - Set build date to date/time firmware was compiled: `__DATE__ " " __TIME__`
  - `Marlin/_Bootscreen.h`
    - Copied from Ender 3 Pro configuration archive
@@ -227,7 +227,7 @@ This then worked for me and I then tried the same with my custom firmware and it
 
 # Marlin 3D Printer Firmware
 
-<p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
+<p align="center"><img src="buildroot<p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
 
 <h1 align="center">Marlin 3D Printer Firmware</h1>
 
