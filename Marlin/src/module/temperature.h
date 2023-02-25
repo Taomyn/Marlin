@@ -586,7 +586,7 @@ class Temperature {
 
     #if HAS_HOTEND
       static hotend_info_t temp_hotend[HOTENDS];
-      static const celsius_t hotend_maxtemp[HOTENDS];
+      static constexpr celsius_t hotend_maxtemp[HOTENDS] = ARRAY_BY_HOTENDS(HEATER_0_MAXTEMP, HEATER_1_MAXTEMP, HEATER_2_MAXTEMP, HEATER_3_MAXTEMP, HEATER_4_MAXTEMP, HEATER_5_MAXTEMP, HEATER_6_MAXTEMP, HEATER_7_MAXTEMP);
       static celsius_t hotend_max_target(const uint8_t e) { return hotend_maxtemp[e] - (HOTEND_OVERSHOOT); }
     #endif
 
@@ -643,6 +643,8 @@ class Temperature {
       static bool tooColdToExtrude(const uint8_t E_NAME)       { return tooCold(wholeDegHotend(HOTEND_INDEX)); }
       static bool targetTooColdToExtrude(const uint8_t E_NAME) { return tooCold(degTargetHotend(HOTEND_INDEX)); }
     #else
+      static constexpr bool allow_cold_extrude = true;
+      static constexpr celsius_t extrude_min_temp = 0;
       static bool tooColdToExtrude(const uint8_t) { return false; }
       static bool targetTooColdToExtrude(const uint8_t) { return false; }
     #endif
@@ -1160,6 +1162,12 @@ class Temperature {
       static void auto_job_check_timer(const bool can_start, const bool can_stop);
     #endif
 
+    #if ENABLED(TEMP_TUNING_MAINTAIN_FAN)
+      static bool adaptive_fan_slowing;
+    #elif ENABLED(ADAPTIVE_FAN_SLOWING)
+      static constexpr bool adaptive_fan_slowing = true;
+    #endif
+
     /**
      * Perform auto-tuning for hotend or bed in response to M303
      */
@@ -1170,12 +1178,6 @@ class Temperature {
       #endif
 
       static void PID_autotune(const celsius_t target, const heater_id_t heater_id, const int8_t ncycles, const bool set_result=false);
-
-      #if ENABLED(NO_FAN_SLOWING_IN_PID_TUNING)
-        static bool adaptive_fan_slowing;
-      #elif ENABLED(ADAPTIVE_FAN_SLOWING)
-        static constexpr bool adaptive_fan_slowing = true;
-      #endif
 
       // Update the temp manager when PID values change
       #if ENABLED(PIDTEMP)
@@ -1193,7 +1195,7 @@ class Temperature {
     #endif
 
     #if ENABLED(MPCTEMP)
-      void MPC_autotune();
+      void MPC_autotune(const uint8_t e);
     #endif
 
     #if ENABLED(PROBING_HEATERS_OFF)

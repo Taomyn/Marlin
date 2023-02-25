@@ -272,7 +272,7 @@ namespace Language_hu {
   LSTR MSG_MOVE_05IN                      = _UxGT("Mozgás 12.7mm");
   LSTR MSG_MOVE_1IN                       = _UxGT("Mozgáá 25.4mm");
   LSTR MSG_SPEED                          = _UxGT("Sebesség");
-  LSTR MSG_BED_Z                          = _UxGT("Z ágy");
+  LSTR MSG_MESH_Z_OFFSET                  = _UxGT("Z ágy");
   LSTR MSG_NOZZLE                         = _UxGT("Fej");
   LSTR MSG_NOZZLE_N                       = _UxGT("Fej ~");
   LSTR MSG_NOZZLE_PARKED                  = _UxGT("Fej parkolva");
@@ -467,7 +467,7 @@ namespace Language_hu {
   LSTR MSG_MANUAL_DEPLOY_TOUCHMI          = _UxGT("TouchMI használ");
   LSTR MSG_MANUAL_DEPLOY                  = _UxGT("Z-Szonda telepítés");
   LSTR MSG_MANUAL_STOW                    = _UxGT("Z-Szonda elhelyezés");
-  LSTR MSG_HOME_FIRST                     = _UxGT("Elöször %s%s%s kell");
+  LSTR MSG_HOME_FIRST                     = _UxGT("Elöször %s kell");
   LSTR MSG_ZPROBE_OFFSETS                 = _UxGT("Szonda eltolások");
   LSTR MSG_ZPROBE_XOFFSET                 = _UxGT("X szonda eltolás");
   LSTR MSG_ZPROBE_YOFFSET                 = _UxGT("Y szonda eltolás");

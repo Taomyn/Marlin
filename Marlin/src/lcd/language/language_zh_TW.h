@@ -229,7 +229,7 @@ namespace Language_zh_TW {
   LSTR MSG_MOVE_50MM                      = _UxGT("移動 50 mm");     // "Move 50mm"
   LSTR MSG_MOVE_100MM                     = _UxGT("移動 100 mm");    // "Move 100mm"
   LSTR MSG_SPEED                          = _UxGT("速率");     // "Speed"
-  LSTR MSG_BED_Z                          = _UxGT("熱床Z");     // "Bed Z"
+  LSTR MSG_MESH_Z_OFFSET                  = _UxGT("熱床Z");     // "Bed Z"
   LSTR MSG_NOZZLE                         = " " LCD_STR_THERMOMETER _UxGT(" 噴嘴");     // "Nozzle" 噴嘴
   LSTR MSG_NOZZLE_N                       = " " LCD_STR_THERMOMETER _UxGT(" 噴嘴 ~");
   LSTR MSG_BED                            = " " LCD_STR_THERMOMETER _UxGT(" 熱床");     // "Bed"
@@ -369,7 +369,7 @@ namespace Language_zh_TW {
   LSTR MSG_BLTOUCH_STOW                   = _UxGT("裝載BLTouch");     // "Stow BLTouch"
   LSTR MSG_BLTOUCH_DEPLOY                 = _UxGT("部署BLTouch");     // "Deploy BLTouch"
 
-  LSTR MSG_HOME_FIRST                     = _UxGT("歸位 %s%s%s 先");     // "Home ... first"
+  LSTR MSG_HOME_FIRST                     = _UxGT("歸位 %s 先");     // "Home ... first"
   LSTR MSG_ZPROBE_OFFSETS                 = _UxGT("探針偏移");   //Probe Offsets
   LSTR MSG_ZPROBE_XOFFSET                 = _UxGT("探針X偏移量");   //Probe X Offset
   LSTR MSG_ZPROBE_YOFFSET                 = _UxGT("探針Y偏移量");   //Probe Y Offset

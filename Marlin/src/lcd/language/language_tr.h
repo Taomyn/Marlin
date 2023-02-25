@@ -235,7 +235,7 @@ namespace Language_tr {
   LSTR MSG_MOVE_10MM                      = _UxGT("10mm");
   LSTR MSG_MOVE_100MM                     = _UxGT("100mm");
   LSTR MSG_SPEED                          = _UxGT("Hız");
-  LSTR MSG_BED_Z                          = _UxGT("Z Mesafesi");
+  LSTR MSG_MESH_Z_OFFSET                  = _UxGT("Z Mesafesi");
   LSTR MSG_NOZZLE                         = _UxGT("Nozul");
   LSTR MSG_NOZZLE_N                       = _UxGT("Nozul ~");
   LSTR MSG_BED                            = _UxGT("Tabla");
@@ -390,7 +390,7 @@ namespace Language_tr {
   LSTR MSG_MANUAL_DEPLOY_TOUCHMI          = _UxGT("TouchMI Aç");
   LSTR MSG_MANUAL_DEPLOY                  = _UxGT("Z-Probe Aç");
   LSTR MSG_MANUAL_STOW                    = _UxGT("Z-Probe Kapat");
-  LSTR MSG_HOME_FIRST                     = _UxGT("Önce %s%s%s Sıfırla");
+  LSTR MSG_HOME_FIRST                     = _UxGT("Önce %s Sıfırla");
   LSTR MSG_ZPROBE_OFFSETS                 = _UxGT("Prob Ofsetleri");
   LSTR MSG_ZPROBE_XOFFSET                 = _UxGT("X Prob Ofset");
   LSTR MSG_ZPROBE_YOFFSET                 = _UxGT("Y Prob Ofset");
