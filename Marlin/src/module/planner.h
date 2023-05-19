@@ -246,7 +246,7 @@ typedef struct PlannerBlock {
     uint32_t acceleration_rate;             // The acceleration rate used for acceleration calculation
   #endif
 
-  axis_bits_t direction_bits;               // The direction bit set for this block (refers to *_DIRECTION_BIT in config.h)
+  AxisBits direction_bits;                  // Direction bits set for this block, where 1 is negative motion
 
   // Advance extrusion
   #if ENABLED(LIN_ADVANCE)
@@ -417,7 +417,7 @@ class Planner {
 
     #if ENABLED(DIRECT_STEPPING)
       static uint32_t last_page_step_rate;          // Last page step rate given
-      static xyze_bool_t last_page_dir;             // Last page direction given
+      static AxisBits last_page_dir;                // Last page direction given, where 1 represents forward or positive motion
     #endif
 
     #if HAS_EXTRUDERS

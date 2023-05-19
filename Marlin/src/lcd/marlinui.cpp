@@ -424,7 +424,7 @@ void MarlinUI::init() {
 
     #if !HAS_GRAPHICAL_TFT
 
-      void _wrap_string(uint8_t &col, uint8_t &row, const char * const string, read_byte_cb_t cb_read_byte, bool wordwrap/*=false*/) {
+      void _wrap_string(uint8_t &col, uint8_t &row, const char * const string, read_byte_cb_t cb_read_byte, const bool wordwrap/*=false*/) {
         SETCURSOR(col, row);
         if (!string) return;
 
@@ -506,7 +506,7 @@ void MarlinUI::init() {
         ui.manual_move.menu_scale = REPRAPWORLD_KEYPAD_MOVE_STEP;
         ui.encoderPosition = dir;
         switch (axis) {
-          case X_AXIS:
+          TERN_(HAS_X_AXIS, case X_AXIS:)
           TERN_(HAS_Y_AXIS, case Y_AXIS:)
           TERN_(HAS_Z_AXIS, case Z_AXIS:)
             lcd_move_axis(axis);
