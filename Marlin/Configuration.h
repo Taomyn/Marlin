@@ -1751,6 +1751,21 @@
 //#define V_HOME_DIR -1
 //#define W_HOME_DIR -1
 
+/**
+ * Safety Stops
+ * If an axis has endstops on both ends the one specified above is used for
+ * homing, while the other can be used for things like SD_ABORT_ON_ENDSTOP_HIT.
+ */
+//#define X_SAFETY_STOP
+//#define Y_SAFETY_STOP
+//#define Z_SAFETY_STOP
+//#define I_SAFETY_STOP
+//#define J_SAFETY_STOP
+//#define K_SAFETY_STOP
+//#define U_SAFETY_STOP
+//#define V_SAFETY_STOP
+//#define W_SAFETY_STOP
+
 // @section geometry
 
 // The size of the printable area
@@ -3315,6 +3330,8 @@
   #define TFT_THEME BLACK_MARLIN
 
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
+
+  #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space
 #endif
 
 #if ENABLED(TFT_LVGL_UI)
