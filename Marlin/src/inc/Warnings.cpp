@@ -729,8 +729,12 @@
   #endif
 #endif
 
-#if ENABLED(QUICK_HOME) && (X_SPI_SENSORLESS || Y_SPI_SENSORLESS)
-  #warning "SPI_ENDSTOPS may be unreliable with QUICK_HOME. Adjust SENSORLESS_BACKOFF_MM for better results."
+#if ENABLED(QUICK_HOME)
+  #if X_SPI_SENSORLESS || Y_SPI_SENSORLESS
+    #warning "If SPI_ENDSTOPS are unreliable with QUICK_HOME try adjusting SENSORLESS_BACKOFF_MM, Travel Acceleration (M204 T), Homing Feedrate (M210 XY), or disable QUICK_HOME."
+  #elif X_SENSORLESS || Y_SENSORLESS
+    #warning "If SENSORLESS_HOMING is unreliable with QUICK_HOME try adjusting SENSORLESS_BACKOFF_MM, Travel Acceleration (M204 T), Homing Feedrate (M210 XY), or disable QUICK_HOME."
+  #endif
 #endif
 
 #if HIGHER_CURRENT_HOME_WARNING
@@ -920,4 +924,11 @@
  */
 #if defined(ARDUINO_ARCH_HC32) && F_CPU == 200000000
   #warning "HC32 clock is assumed to be 200MHz. If this isn't the case for your board please submit a report so we can add support."
+#endif
+
+/**
+ * Peltier with PIDTEMPBED
+ */
+#if ALL(PELTIER_BED, PIDTEMPBED)
+  #warning "PELTIER_BED with PIDTEMPBED requires extra circuitry. Use with caution."
 #endif
