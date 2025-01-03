@@ -42,6 +42,7 @@
  * version was tagged.
  */
 //#define STRING_DISTRIBUTION_DATE "2024-12-18"
+#define STRING_DISTRIBUTION_DATE __DATE__ " " __TIME__
 
 /**
  * The protocol for communication to the host. Protocol indicates communication
@@ -50,14 +51,10 @@
  */
 //#define PROTOCOL_VERSION "1.0"
 
-
-#define STRING_DISTRIBUTION_DATE __DATE__ " " __TIME__
-
-
 /**
  * Defines a generic printer name to be output to the LCD after booting Marlin.
  */
-//#define MACHINE_NAME "3D Printer"
+#define MACHINE_NAME "Ender 3 Pro"
 
 /**
  * The SOURCE_CODE_URL is the location where users will find the Marlin Source
