@@ -188,10 +188,8 @@ static bool ensure_safe_temperature(const bool wait=true, const PauseMode mode=P
  *
  * Returns 'true' if load was completed, 'false' for abort
  */
-bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load_length/*=0*/, const_float_t purge_length/*=0*/, const int8_t max_beep_count/*=0*/,
-                   const bool show_lcd/*=false*/, const bool pause_for_user/*=false*/,
-                   const PauseMode mode/*=PAUSE_MODE_PAUSE_PRINT*/
-                   DXC_ARGS
+bool load_filament(const float slow_load_length/*=0*/, const float fast_load_length/*=0*/, const float purge_length/*=0*/, const int8_t max_beep_count/*=0*/,
+  const bool show_lcd/*=false*/, const bool pause_for_user/*=false*/, const PauseMode mode/*=PAUSE_MODE_PAUSE_PRINT*/ DXC_ARGS
 ) {
   DEBUG_SECTION(lf, "load_filament", true);
   DEBUG_ECHOLNPGM("... slowlen:", slow_load_length, " fastlen:", fast_load_length, " purgelen:", purge_length, " maxbeep:", max_beep_count, " showlcd:", show_lcd, " pauseforuser:", pause_for_user, " pausemode:", mode DXC_SAY);
@@ -221,7 +219,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
       impatient_beep(max_beep_count);
       #if ALL(HAS_FILAMENT_SENSOR, FILAMENT_CHANGE_RESUME_ON_INSERT)
         #if MULTI_FILAMENT_SENSOR
-          #define _CASE_INSERTED(N) case N-1: if (READ(FIL_RUNOUT##N##_PIN) != FIL_RUNOUT##N##_STATE) wait_for_user = false; break;
+          #define _CASE_INSERTED(N) case N-1: if (!FILAMENT_IS_OUT(N)) wait_for_user = false; break;
           switch (active_extruder) {
             REPEAT_1(NUM_RUNOUT_SENSORS, _CASE_INSERTED)
           }
@@ -344,10 +342,10 @@ inline void disable_active_extruder() {
  *
  * Returns 'true' if unload was completed, 'false' for abort
  */
-bool unload_filament(const_float_t unload_length, const bool show_lcd/*=false*/,
+bool unload_filament(const float unload_length, const bool show_lcd/*=false*/,
                      const PauseMode mode/*=PAUSE_MODE_PAUSE_PRINT*/
                      #if ALL(FILAMENT_UNLOAD_ALL_EXTRUDERS, MIXING_EXTRUDER)
-                       , const_float_t mix_multiplier/*=1.0*/
+                       , const float mix_multiplier/*=1.0*/
                      #endif
 ) {
   DEBUG_SECTION(uf, "unload_filament", true);
@@ -418,7 +416,7 @@ bool unload_filament(const_float_t unload_length, const bool show_lcd/*=false*/,
  */
 uint8_t did_pause_print = 0;
 
-bool pause_print(const_float_t retract, const xyz_pos_t &park_point, const bool show_lcd/*=false*/, const_float_t unload_length/*=0*/ DXC_ARGS) {
+bool pause_print(const float retract, const xyz_pos_t &park_point, const bool show_lcd/*=false*/, const float unload_length/*=0*/ DXC_ARGS) {
   DEBUG_SECTION(pp, "pause_print", true);
   DEBUG_ECHOLNPGM("... park.x:", park_point.x, " y:", park_point.y, " z:", park_point.z, " unloadlen:", unload_length, " showlcd:", show_lcd DXC_SAY);
 
@@ -439,7 +437,7 @@ bool pause_print(const_float_t retract, const xyz_pos_t &park_point, const bool 
 
   // Pause the print job and timer
   #if HAS_MEDIA
-    const bool was_sd_printing = IS_SD_PRINTING();
+    const bool was_sd_printing = card.isStillPrinting();
     if (was_sd_printing) {
       card.pauseSDPrint();
       ++did_pause_print; // Indicate SD pause also
@@ -639,9 +637,9 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
  * - Resume the current SD print job, if any
  */
 void resume_print(
-  const_float_t   slow_load_length/*=0*/,
-  const_float_t   fast_load_length/*=0*/,
-  const_float_t   purge_length/*=ADVANCED_PAUSE_PURGE_LENGTH*/,
+  const float   slow_load_length/*=0*/,
+  const float   fast_load_length/*=0*/,
+  const float   purge_length/*=ADVANCED_PAUSE_PURGE_LENGTH*/,
   const int8_t    max_beep_count/*=0*/,
   const celsius_t targetTemp/*=0*/,
   const bool      show_lcd/*=true*/,

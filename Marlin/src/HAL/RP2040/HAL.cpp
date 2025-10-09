@@ -59,11 +59,8 @@ void MarlinHAL::init() {
   constexpr int cpuFreq = F_CPU;
   UNUSED(cpuFreq);
 
-  #undef SDSS
-  #define SDSS 2
-  #define PIN_EXISTS_(P1,P2) (defined(P1##P2) && P1##P2 >= 0)
-  #if HAS_MEDIA && DISABLED(SDIO_SUPPORT) && PIN_EXISTS_(SDSS,)
-    OUT_WRITE(SDSS, HIGH); // Try to set SDSS inactive before any other SPI users start up
+  #if HAS_MEDIA && DISABLED(ONBOARD_SDIO) && PIN_EXISTS(SD_SS)
+    OUT_WRITE(SD_SS_PIN, HIGH); // Try to set SD_SS_PIN inactive before any other SPI users start up
   #endif
 
   #if PIN_EXISTS(LED)
@@ -80,7 +77,7 @@ void MarlinHAL::init() {
 
   HAL_timer_init();
 
-  #if ENABLED(EMERGENCY_PARSER) && USBD_USE_CDC
+  #if ALL(EMERGENCY_PARSER, USBD_USE_CDC)
     USB_Hook_init();
   #endif
 
@@ -90,7 +87,7 @@ void MarlinHAL::init() {
 
   #if PIN_EXISTS(USB_CONNECT)
     OUT_WRITE(USB_CONNECT_PIN, !USB_CONNECT_INVERTING); // USB clear connection
-    delay_ms(1000);                                        // Give OS time to notice
+    delay_ms(1000);                                     // Give OS time to notice
     WRITE(USB_CONNECT_PIN, USB_CONNECT_INVERTING);
   #endif
 }
@@ -115,7 +112,7 @@ void MarlinHAL::reboot() { watchdog_reboot(0, 0, 1); }
 
   void MarlinHAL::watchdog_init() {
     #if DISABLED(DISABLE_WATCHDOG_INIT)
-      static_assert(WDT_TIMEOUT_US > 1000, "WDT Timout is too small, aborting");
+      static_assert(WDT_TIMEOUT_US > 1000, "WDT Timeout is too small, aborting");
       watchdog_enable(WDT_TIMEOUT_US/1000, true);
     #endif
   }
