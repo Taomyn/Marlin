@@ -105,7 +105,14 @@
   #endif
 #endif
 
-#if !(ANY(HAS_BED_PROBE, BACKLASH_GCODE) || (ENABLED(EXTENSIBLE_UI) && ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)))
+#if HAS_BED_PROBE
+  #ifndef Z_PROBE_FEEDRATE_SLOW
+    #define Z_PROBE_FEEDRATE_SLOW (4*60)
+  #endif
+  #ifndef Z_PROBE_FEEDRATE_FAST
+    #define Z_PROBE_FEEDRATE_FAST (Z_PROBE_FEEDRATE_SLOW / 2)
+  #endif
+#elif !(ANY(HAS_BED_PROBE, BACKLASH_GCODE) || ALL(EXTENSIBLE_UI, HAS_MESH))
   #undef Z_PROBE_FEEDRATE_FAST
   #undef Z_PROBE_FEEDRATE_SLOW
 #endif
@@ -363,6 +370,13 @@
   #if ANY(FTM_DIR_CHANGE_HOLD_X, FTM_DIR_CHANGE_HOLD_Y, FTM_DIR_CHANGE_HOLD_Z, FTM_DIR_CHANGE_HOLD_E)
     #define HAS_FTM_DIR_CHANGE_HOLD 1
   #endif
+  #if ANY(FTM_POLYS, FTM_CONSTANT_JOLT)
+    #define HAS_FTM_TRAJECTORY_SELECTION 1
+  #endif
+  // Default trajectory type when not explicitly set
+  #ifndef FTM_TRAJECTORY_TYPE
+    #define FTM_TRAJECTORY_TYPE TRAPEZOIDAL
+  #endif
 #endif
 
 // Standard Motion
@@ -408,7 +422,7 @@
   #define HAS_CLASSIC_E_JERK 1
 #endif
 // E jerk is derived from JD factors
-#if ALL(HAS_JUNCTION_DEVIATION, LIN_ADVANCE)
+#if HAS_JUNCTION_DEVIATION && ANY(LIN_ADVANCE, FTM_HAS_LIN_ADVANCE)
   #define HAS_LINEAR_E_JERK 1
 #endif
 
