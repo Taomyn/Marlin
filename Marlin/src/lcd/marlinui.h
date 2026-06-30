@@ -95,7 +95,7 @@ typedef bool (*statusResetFunc_t)();
   #define LCD_UPDATE_INTERVAL DIV_TERN(DOUBLE_LCD_FRAMERATE, TERN(HAS_TOUCH_BUTTONS, 50, 100), 2)
 #endif
 
-#if LCD_WITH_BLINK && HAS_EXTRA_PROGRESS && !IS_DWIN_MARLINUI
+#if LCD_WITH_BLINK && HAS_EXTRA_PROGRESS
   #define HAS_ROTATE_PROGRESS 1
 #endif
 
@@ -835,6 +835,11 @@ public:
     #endif
 
     static void update_buttons();
+
+    #if ENABLED(MIGHTYBOARD_BACK_STATUS_BUTTONS)
+      // Requests set from interrupt context and handled in main loop
+      static volatile uint8_t request_back;
+    #endif
 
     #if ENABLED(ENCODER_NOISE_FILTER)
       /**
